@@ -27,12 +27,15 @@ router.beforeEach((to, from, next) => {
     const publicPages = ['/auth/login', '/auth/register', '/auth/forgot-password', '/auth/reset-password'];
     const authRequired = !publicPages.includes(to.path);
 
-    const loggedIn = secureLs().get('_app__metadata');
+    const loggedIn = secureLs().get(process.env.VUE_APP_LS_NAME);
 
     // trying to access a restricted page + not logged in
     // redirect to login page
 
+    console.log('authRequired', authRequired, to.path)
+
     if (authRequired && !loggedIn) {
+        console.log("redirect to login")
         return next({name: "auth.login"});
     } else {
         next();
