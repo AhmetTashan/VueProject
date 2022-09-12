@@ -6,9 +6,10 @@ const moduleRoute = {
     children: [
         {
             path: "list",
+            name: "post.list",
             component: () => import('./views/Home'),
             meta: {
-                // template: "blank"
+                template: "default", // blank && default
             }
         }
     ]
