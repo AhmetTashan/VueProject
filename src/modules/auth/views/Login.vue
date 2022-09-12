@@ -71,13 +71,13 @@ export default {
                 </label>
             </div>
             <button class="w-100 btn btn-lg btn-primary" type="submit">Giriş yap</button>
-            <p class="mt-2 mb-4 form-text">Henüz bir hesabın yok mu?
+            <p class="mt-4 mt-lg-2 mb-4 text-center text-lg-start form-text">Henüz bir hesabın yok mu?
                 <RouterLink :to="{name: 'auth.register'}"
                             class="text-decoration-none hover-text-decoration-underline">
                     Kaydol
                 </RouterLink>
             </p>
-            <p class="mt-3 mb-4 text-muted">&copy; 2017–2022</p>
+            <p class="mt-3 mb-4 text-muted text-center">&copy; 2017–2022</p>
         </form>
     </main>
 </template>

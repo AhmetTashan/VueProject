@@ -1,8 +1,28 @@
 <template>
-    <div id="nav">
-        <router-link to="/post/list">Post</router-link> |
-        <router-link :to="{name: 'auth.logout'}">Çıkış Yap</router-link>
+    <Header/>
+    <div class="container">
+        <router-view/>
     </div>
-    <router-view/>
-    <div>footer</div>
 </template>
+
+<script>
+import Header from './Header.vue'
+
+export default {
+    name: 'Default',
+    components: {
+        Header
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+.container {
+    &:before {
+        content: '';
+        display: block;
+        height: 80px;
+    }
+}
+
+</style>
