@@ -9,7 +9,7 @@ const moduleRoute = {
             name: "dashboard.home",
             component: () => import('./views/Dashboard'),
             meta: {
-                template: "default",
+                template: "default", // blank && default
             }
         }
     ]
