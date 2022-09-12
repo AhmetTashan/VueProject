@@ -31,9 +31,12 @@ export default {
         isAuthenticationFromLocalStorage() {
             try {
                 let metadata = this.$secureLs.get(process.env.VUE_APP_LS_NAME);
-                this.setAccessToken(metadata?.access_token);
-                this.setUser(metadata?.user);
-                this.setAuthentication(true);
+                if (metadata) {
+                    this.setAccessToken(metadata?.access_token);
+                    this.setUser(metadata?.user);
+                    this.setAuthentication(true);
+                }
+
             } catch (e) {
                 this.$secureLs.remove(process.env.VUE_APP_LS_NAME);
                 this.setAuthentication(false);
@@ -53,6 +56,7 @@ export default {
         },
         // vuex state değerini anlık takip etmek için kullan
         getAuthentication(val) {
+            console.log("getAuthentication val :>>", val);
             if (val === false) {
                 this.$router.push({name: "auth.logout"});
             }
