@@ -1,7 +1,6 @@
 <script>
 import AuthRequest from "../service/authRequest";
 import {mapActions} from "vuex";
-import { useRouter } from 'vue-router';
 
 export default {
     name: "Login",
