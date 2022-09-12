@@ -3,7 +3,7 @@ export default {
     name: "Logout",
     methods: {
         logout: function () {
-            this.$secureLs.remove("_app__metadata");
+            this.$secureLs.remove(process.env.VUE_APP_LS_NAME);
             this.$store.dispatch("auth/setAuthentication", undefined);
             this.$store.dispatch("auth/setAccessToken", undefined);
             this.$store.dispatch("auth/setUser", {});

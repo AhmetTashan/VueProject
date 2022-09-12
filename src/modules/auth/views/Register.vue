@@ -21,7 +21,7 @@ export default {
 
             AuthRequest.register(this.formData)
                 .then((response) => {
-                    this.$secureLs.set("_app__metadata", response.data);
+                    this.$secureLs.set(process.env.VUE_APP_LS_NAME, response.data);
 
                     this.setAccessToken(response.data.access_token);
                     this.setUser(response.data.user);

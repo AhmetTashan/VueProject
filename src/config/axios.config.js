@@ -55,10 +55,10 @@ class AxiosConfig {
     #start() {
         this.#getBaseUrl();
 
-        if (secureLS().get("_app__metadata") && secureLS().get("_app__metadata").access_token) {
+        if (secureLS().get(process.env.VUE_APP_LS_NAME) && secureLS().get(process.env.VUE_APP_LS_NAME).access_token) {
             this.#header = {
                 ...this.#header,
-                Authorization: `Bearer ${secureLS().get("_app__metadata").access_token}`
+                Authorization: `Bearer ${secureLS().get(process.env.VUE_APP_LS_NAME).access_token}`
             };
         }
 

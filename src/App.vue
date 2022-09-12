@@ -30,12 +30,12 @@ export default {
     methods: {
         isAuthenticationFromLocalStorage() {
             try {
-                let metadata = this.$secureLs.get("_app__metadata");
+                let metadata = this.$secureLs.get(process.env.VUE_APP_LS_NAME);
                 this.setAccessToken(metadata?.access_token);
                 this.setUser(metadata?.user);
                 this.setAuthentication(true);
             } catch (e) {
-                this.$secureLs.remove("_app__metadata");
+                this.$secureLs.remove(process.env.VUE_APP_LS_NAME);
                 this.setAuthentication(false);
             }
         },
