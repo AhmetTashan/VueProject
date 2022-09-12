@@ -1,0 +1,27 @@
+.form-control, .form-control.is-invalid, .form-control.is-valid {
+    &, &.is-invalid, &.is-valid {
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    &:focus {
+        border-color: var(--bs-primary);
+    }
+
+    &.is-invalid {
+        color: var(--bs-danger);
+
+        &:focus {
+            border-color: var(--bs-danger);
+        }
+    }
+
+    &.is-valid {
+        color: var(--bs-success);
+
+        &:focus {
+            border-color: var(--bs-success);
+        }
+    }
+}

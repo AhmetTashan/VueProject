@@ -1,0 +1,82 @@
+laravel
+env
+SESSION_DRIVER=cookie
+SESSION_DOMAIN='http://localhost:3000'
+SANCTUM_STATEFUL_DOMAINS='localhost,127.0.0.1,http://localhost:3000'
+
+
+migrate/user
+    $table->id();
+    $table->string('name');
+    $table->string('surname');
+    $table->string('username')->unique();
+    $table->string('email')->unique();
+    $table->timestamp('email_verified_at')->nullable();
+    $table->string('password');
+    $table->rememberToken();
+    $table->timestamps();
+
+model/user
+    'name',
+    'surname',
+    'username',
+    'email',
+    'password',
+
+controller   --d�zenlenecek
+
+/**
+     * Register api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|alpha|min:3',
+            'surname' => 'required|alpha|min:2',
+            'username' => 'required|alpha_num|min:2|unique:users,username',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+        $user = User::create($input);
+        $success['token'] = $user->createToken('REGISTER')->plainTextToken;
+        $success['name'] = $user->name;
+
+        return $this->sendResponse($success, 'User register successfully.');
+    }
+
+    /**
+     * Login api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function login(Request $request)
+    {
+        $fieldType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $abilities = ['*'];
+        if ($request->remember_me) {
+            $abilities[] = 'remember';
+        }
+        if (Auth::attempt([$fieldType => $request->login, 'password' => $request->password])) {
+            $user = Auth::user();
+            $success['token'] = $user->createToken('LOGIN', $abilities)->plainTextToken;
+            $success['user'] = $user;
+
+            return $this->sendResponse($success, 'User login successfully.');
+        } else {
+            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+        }
+    }
+
+
+config/sanctum
+
+'prefix' => 'api',

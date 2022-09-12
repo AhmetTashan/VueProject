@@ -1,0 +1,53 @@
+/**
+ * responsive
+ * kullanımı @include mq(){
+		// kod icerigi
+	}
+ */
+@mixin miq($width: "tablet") {
+    @if ($width == "tablet") {
+        // Medium devices (tablets, 769px and up)
+        @media (min-width: 769px) {
+            @content;
+        }
+    } @else if ($width == "desktop") {
+        // Large devices (desktops, 993px and up)
+        @media (min-width: 993px) {
+            @content;
+        }
+    } @else if ($width == "large") {
+        // Extra devices (large, 1201px and up)
+        @media (min-width: 1201px) {
+            @content;
+        }
+    } @else {
+        // istenilen boyut
+        @media (max-width: $width) {
+            @content;
+        }
+    }
+}
+
+@mixin maq($width: "tablet") {
+    @if ($width == "tablet") {
+        // Medium devices (tablets, 768px and up)
+        @media (max-width: 768px) {
+            @content;
+        }
+    } @else if ($width == "desktop") {
+        // Large devices (desktops, 992px and up)
+        @media (max-width: 992px) {
+            @content;
+        }
+    } @else if ($width == "large") {
+        // Extra devices (large, 1200px and up)
+        @media (max-width: 1200px) {
+            @content;
+        }
+    } @else {
+        // istenilen boyut
+        @media (max-width: $width) {
+            @content;
+        }
+    }
+}
