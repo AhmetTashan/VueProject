@@ -1,5 +1,5 @@
 <template>
 <div>
-    Ana Sayfa
+    Yazılar Listesi
 </div>
 </template>
