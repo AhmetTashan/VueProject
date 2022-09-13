@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import '@/modules/modules.js'
 import secureLs from '@/services/secureLs.service'
+import axios from '@/services/axios.service'
 
 // import bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -17,6 +18,7 @@ const app = createApp(App);
 
 app.config.globalProperties.$secureLs = secureLs
 
-app.use(store)
+app.use(axios)
+    .use(store)
     .use(router)
     .mount('#app')

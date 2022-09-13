@@ -55,14 +55,14 @@ class AxiosConfig {
     #start() {
         this.#getBaseUrl();
 
-        if (secureLS().get(process.env.VUE_APP_LS_NAME) && secureLS().get(process.env.VUE_APP_LS_NAME).access_token) {
+        if (secureLS.get(process.env.VUE_APP_LS_NAME) && secureLS.get(process.env.VUE_APP_LS_NAME).access_token) {
             this.#header = {
                 ...this.#header,
-                Authorization: `Bearer ${secureLS().get(process.env.VUE_APP_LS_NAME).access_token}`
+                Authorization: `Bearer ${secureLS.get(process.env.VUE_APP_LS_NAME).access_token}`
             };
         }
 
-        return axios.create({
+        const axiosInstance = axios.create({
             baseURL: this.#baseUrl,
             withCredentials: true,
             headers: {
@@ -71,6 +71,29 @@ class AxiosConfig {
                 ...this.#header
             },
         });
+
+        axiosInstance.interceptors.response.use(undefined, (error) => {
+
+            const statusCode = error.response ? error.response.status : null;
+
+            if (statusCode === 0) {
+                return Promise.reject("Server not found");
+            }
+
+            if (statusCode === 404) {
+                return Promise.reject("Page not found");
+            }
+
+            if (statusCode === 401) {
+                if (error.response.data.message === "Unauthenticated.") {
+                    window.open("/#/auth/logout", "_self");
+                }
+            }
+
+            return Promise.reject(error);
+        });
+
+        return axiosInstance;
     }
 
     // -----------
