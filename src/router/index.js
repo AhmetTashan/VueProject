@@ -32,10 +32,7 @@ router.beforeEach((to, from, next) => {
     // trying to access a restricted page + not logged in
     // redirect to login page
 
-    console.log('authRequired', authRequired, to.path)
-
     if (authRequired && !loggedIn) {
-        console.log("redirect to login")
         return next({name: "auth.login"});
     } else {
         next();
