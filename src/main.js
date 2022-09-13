@@ -15,7 +15,7 @@ import '@/assets/styles/App.scss'
 
 const app = createApp(App);
 
-app.config.globalProperties.$secureLs = secureLs();
+app.config.globalProperties.$secureLs = secureLs
 
 app.use(store)
     .use(router)
