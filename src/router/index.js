@@ -1,12 +1,12 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
-import Home from '@/views/Home.vue'
+import Init from '@/views/Init.vue'
 import secureLs from '@/services/secureLs.service'
 
 const routes = [
     {
         path: '/',
-        name: 'Home',
-        component: Home
+        name: 'init',
+        component: Init
     }
 ]
 

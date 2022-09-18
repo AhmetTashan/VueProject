@@ -7,7 +7,7 @@ const moduleRoute = {
         {
             path: "list",
             name: "post.list",
-            component: () => import('./views/Home'),
+            component: () => import('./views/List'),
             meta: {
                 template: "default", // blank && default
             }

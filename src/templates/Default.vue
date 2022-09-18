@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Header from './Header.vue'
+import Header from './shared/Header.vue'
 
 export default {
     name: 'Default',

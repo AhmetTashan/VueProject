@@ -1,6 +1,6 @@
-import AxiosConfig from "@/config/axios.config";
+import QueryService from "@/services/query.service";
 
-class DashboardRequest extends AxiosConfig {
+class DashboardRequest extends QueryService {
 
     me() {
         return this.path("me")

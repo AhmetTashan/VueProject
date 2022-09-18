@@ -16,22 +16,8 @@ export default {
     methods: {
         login: function () {
 
-            // AuthRequest.login(this.formData).then((response) => {
-            //
-            //     this.$secureLs.set(process.env.VUE_APP_LS_NAME, response.data);
-            //
-            //     this.setAccessToken(response.data.access_token);
-            //     this.setUser(response.data.user);
-            //     this.setAuthentication(true);
-            //
-            //     this.$router.push({name: "dashboard.home"});
-            //
-            // }).catch((error) => {
-            //     // TODO: Hata mesajı göster
-            //     console.log("login hata var :>>", error);
-            // });
+            AuthRequest.login(this.formData).then((response) => {
 
-            this.$axios.post("/auth/login", this.formData).then((response) => {
                 this.$secureLs.set(process.env.VUE_APP_LS_NAME, response.data);
 
                 this.setAccessToken(response.data.access_token);
@@ -39,10 +25,24 @@ export default {
                 this.setAuthentication(true);
 
                 this.$router.push({name: "dashboard.home"});
+
             }).catch((error) => {
                 // TODO: Hata mesajı göster
                 console.log("login hata var :>>", error);
             });
+
+            // this.$axios.post("/auth/login", this.formData).then((response) => {
+            //     this.$secureLs.set(process.env.VUE_APP_LS_NAME, response.data);
+            //
+            //     this.setAccessToken(response.data.access_token);
+            //     this.setUser(response.data.user);
+            //     this.setAuthentication(true);
+            //
+            //     this.$router.push({name: "dashboard.home"});
+            // }).catch((error) => {
+            //     // TODO: Hata mesajı göster
+            //     console.log("login hata var :>>", error);
+            // });
 
         },
         ...mapActions("auth", ["setAuthentication", "setUser", "setAccessToken"]),
@@ -129,8 +129,4 @@ export default {
         }
     }
 }
-</style>
-
-<style lang="scss">
-
 </style>

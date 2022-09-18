@@ -1,6 +1,6 @@
-import AxiosConfig from "@/config/axios.config";
+import QueryService from "@/services/query.service";
 
-class AuthRequest extends AxiosConfig {
+class AuthRequest extends QueryService {
 
     csrfCookie() {
         return this.path("/csrf-cookie")

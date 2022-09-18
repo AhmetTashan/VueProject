@@ -28,6 +28,7 @@ export default {
         this.isAuthenticationFromLocalStorage();
     },
     methods: {
+        // local storage'den giriş bilgilerini alıp store'a atıyoruz.
         isAuthenticationFromLocalStorage() {
             try {
                 let metadata = this.$secureLs.get(process.env.VUE_APP_LS_NAME);
@@ -56,7 +57,6 @@ export default {
         },
         // vuex state değerini anlık takip etmek için kullan
         getAuthentication(val) {
-            console.log("getAuthentication val :>>", val);
             if (val === false) {
                 this.$router.push({name: "auth.logout"});
             }
