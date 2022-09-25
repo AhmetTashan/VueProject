@@ -23,10 +23,9 @@ class LaravelResourceService extends queryService {
             orderBy = 'desc';
         }
 
-        this.#orderBy = {
-            key: key,
-            value: orderBy
-        };
+        this._query.push({
+            [key]: orderBy
+        });
         return this;
     }
 
@@ -37,10 +36,9 @@ class LaravelResourceService extends queryService {
             return false;
         }
 
-        this.#limit = {
-            key: key,
-            value: limit
-        };
+        this._query.push({
+            [key]: limit
+        });
         return this;
     }
 
@@ -51,20 +49,20 @@ class LaravelResourceService extends queryService {
             return false;
         }
 
-        this.#page = {
-            key: key,
-            value: page
-        };
+        this._query.push({
+            [key]: page
+        });
         return this;
     }
 
     #paginate() {
-        let url;
-        url = '?' + this.#page.key + '=' + this.#page.value;
-        url += '&' + this.#limit.key + '=' + this.#limit.value;
-        url += '&' + this.#orderBy.key + '=' + this.#orderBy.value;
 
-        return this._path + url;
+        let path = this._path.split('?');
+        let url = path[0];
+        url += this.#id !== 0 ? this.#id : '';
+        url += path[1] ? '?' + path[1] : '';
+
+        return url;
     }
 
     // ----------------------------

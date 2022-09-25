@@ -9,6 +9,8 @@ class QueryService {
     _path;
     _headers;
     _data = {};
+    #query;
+    _query = [];
 
     #getBaseUrl() {
         this.#baseUrl = this.#baseUrl ?? process.env.VUE_APP_API_URL;
@@ -32,6 +34,7 @@ class QueryService {
         }
 
         this._path = path.startsWith('/') ? path.substr(1) : path;
+        this._path += this.#query ?? '';
         return this;
     }
 
@@ -47,6 +50,28 @@ class QueryService {
 
     baseUrl(baseUrl) {
         this.#baseUrl = baseUrl;
+        return this;
+    }
+
+    query(query = []) {
+        let __query = [
+            ...this._query,
+            ...query
+        ];
+
+        if (__query.length === 0) {
+            return this;
+        }
+
+        let _arr = [];
+
+        __query.map((obj) => {
+            Object.keys(obj).map((key) => {
+                _arr.push(key + '=' + obj[key]);
+            });
+        })
+
+        this.#query = '?' + _arr.join('&');
         return this;
     }
 
