@@ -10,7 +10,7 @@ class QueryService {
     _headers;
     _data = {};
     #query;
-    _query = [];
+    _query = {};
 
     #getBaseUrl() {
         this.#baseUrl = this.#baseUrl ?? process.env.VUE_APP_API_URL;
@@ -53,11 +53,11 @@ class QueryService {
         return this;
     }
 
-    query(query = []) {
-        let __query = [
+    query(query = {}) {
+        let __query = {
             ...this._query,
             ...query
-        ];
+        };
 
         if (__query.length === 0) {
             return this;
@@ -65,11 +65,9 @@ class QueryService {
 
         let _arr = [];
 
-        __query.map((obj) => {
-            Object.keys(obj).map((key) => {
-                _arr.push(key + '=' + obj[key]);
-            });
-        })
+        Object.keys(obj).map((__query) => {
+            _arr.push(key + '=' + __query[key]);
+        });
 
         this.#query = '?' + _arr.join('&');
         return this;
