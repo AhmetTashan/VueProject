@@ -59,7 +59,7 @@ class QueryService {
             ...query
         };
 
-        if (__query.length === 0) {
+        if (Object.keys(__query).length === 0) {
             return this;
         }
 
