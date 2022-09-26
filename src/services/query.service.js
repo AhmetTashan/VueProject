@@ -65,7 +65,7 @@ class QueryService {
 
         let _arr = [];
 
-        Object.keys(obj).map((__query) => {
+        Object.keys(__query).map((key) => {
             _arr.push(key + '=' + __query[key]);
         });
 
